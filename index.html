@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TUGAS JAVASCRIPT DOM</title>
+
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                background-color: #f2f2f2;
+            }
+
+            .container {
+                width: 80%;
+                max-width: 400px;
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+            }
+
+            .form-container, .section-container {
+                border : 2px solid black;
+                border-radius: 8px;
+                padding : 20px;
+                margin-top: 5px;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .form-container input {
+                margin-bottom: 20px;
+                width: calc(100% - 16px);
+                padding: 8px;
+                box-sizing: border-box;
+            }
+
+            .form-container textarea {
+                margin-bottom: 10px;
+                width: calc(100% - 16px);
+                padding: 8px;
+                box-sizing: border-box;
+                height: 80px;
+            }
+
+            .form-container button {
+                background-color: #378a3a;
+                color: white;
+                padding: 10px 20px;
+                border: 2px solid black;
+                border-radius: 10px;
+                cursor: pointer;
+                width: 30%;
+                margin-left: auto;
+                margin-right: auto;
+                font-weight: bold;
+            }
+
+            .form-title {
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .section-title {
+                font-weight: bold;
+                text-align: left;
+            }
+
+            .form-container label {
+                display: block;
+                text-align: left;
+                margin-bottom: 8px;
+            }
+
+            .section-container ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .section-container li {
+                display: block;
+                text-align: left;
+            }
+
+            .section-container li {
+                margin-bottom: 10px;
+            }
+
+            .section-container button {
+                background-color: #0e11c7;
+                color: white;
+                padding: 10px 20px;
+                border: 2px solid black;
+                border-radius: 10px;
+                cursor: pointer;
+                width: 100%;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+        <section class="form-container">
+            <h2 class="form-title">Profil Data</h2>
+            <form id="formInput">
+                <label for="firstName"> First Name : </label>
+                <input type="text" id="firstName" name="firstName" placeholder="Insert First Name" required><br>
+        
+                <label for="lastName"> Last Name : </label>
+                <input type="text" id="lastName" name="lastName" placeholder="Insert Last Name" required><br>
+        
+                <label for="phoneNumber"> Phone Number : </label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Insert Phone Number" required><br>
+        
+                <label for="address"> Address : </label><br>
+                <textarea id="address" name="address" placeholder="Insert Address" required></textarea><br><br>
+        
+                <button type="button" onclick="simpanData()"> Submit </button>
+            </form>
+        </section>
+
+        <section class="section-container">
+            <h2 class="section-title">List Item</h2>
+            <ul id="list">
+                <li>1. First item</li>
+                <li>2. Second item</li>
+            </ul>
+            <button id="tambahItemBtn" onclick="tambahItem()">Tambah</button>
+        </section>
+        </div>
+
+        <script>
+            function simpanData() {
+                const formData = {
+                    first_name: document.getElementById('firstName').value,
+                    last_name: document.getElementById('lastName').value,
+                    phone_number: document.getElementById('phoneNumber').value,
+                    address: document.getElementById('address').value,
+                };
+
+                localStorage.setItem('formData', JSON.stringify(formData));
+
+                console.log('Data Tersimpan di Local Storage :', formData);
+            }
+
+            function tambahItem() {
+                const list = document.getElementById('list');
+                const itemCount = list.childElementCount + 1;
+                const newItem = document.createElement('li');
+                newItem.textContent = `${itemCount}. Extra item`;
+                list.appendChild(newItem);
+            }
+        </script>
+
+    </body>
+</html>
